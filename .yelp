@@ -1,0 +1,6 @@
+alias i="ipython tools/interactive.py"
+alias apperror="tools/scribereader -e prod -f apperror | tools/pretty_error_log"
+alias environ=". ~/.pgconf-$USER/environ.sh"
+alias testify="testify -v -x disabled"
+alias ym="cd ~/pg/yelp-main"
+alias ytail="tools/scribereader -e prod -f $1"

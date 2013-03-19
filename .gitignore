@@ -1,4 +1,4 @@
-# Compiled Python files
+B# Compiled Python files
 *.pyc
 
 # Folder view configuration files
@@ -12,3 +12,10 @@ Thumbs.db
 # Files that might appear on external disks
 .Spotlight-V100
 .Trashes
+
+emacs.desktop
+
+#Yelp
+TAGS
+run_tests.sh
+untracked/
