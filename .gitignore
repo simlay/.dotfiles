@@ -14,6 +14,7 @@ Thumbs.db
 .Trashes
 
 .emacs.desktop
+.emacs.desktop.lock
 
 #Yelp
 TAGS
