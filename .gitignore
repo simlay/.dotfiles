@@ -1,4 +1,4 @@
-B# Compiled Python files
+OBB# Compiled Python files
 *.pyc
 
 # Folder view configuration files
@@ -13,7 +13,7 @@ Thumbs.db
 .Spotlight-V100
 .Trashes
 
-.emacs.desktop
+.emacs*
 
 #Yelp
 TAGS
