@@ -3,6 +3,7 @@ cd "$(dirname "${BASH_SOURCE}")"
 function doIt() {
     rsync --exclude "setup.sh" --exclude "Monaco-Powerline.otf" --exclude "web_start.sh" \
         --exclude "oh-my-zsh" --exclude "tmux-powerline" --exclude ".git/" \
+        --exclude ".gitmodules" \
         --exclude ".DS_Store" --exclude "bootstrap.sh" --exclude "README.md" \
         --exclude "requirements.txt" --exclude "more_python.txt" \
         -av . ~
