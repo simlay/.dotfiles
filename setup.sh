@@ -8,7 +8,7 @@ cd "$(dirname "${BASH_SOURCE}")"
 case `uname` in
     'Darwin')
 	source .brew
-	;;
+    ;;
     'Linux')
 	source .apt-get
         ;;
@@ -26,5 +26,3 @@ echo "Installing Dot Files."
 source bootstrap.sh
 echo "Installing Tmux Configuration."
 tmux-powerline/generate_conf.sh
-echo "Installing oh-my-zsh."
-oh-my-zsh/install.sh -f

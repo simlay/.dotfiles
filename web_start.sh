@@ -26,5 +26,5 @@ case `uname` in
         ;;
 esac
 
-git clone git@github.com:IvanMalison/dotfiles.git
+git clone git@github.com:simlay/dotfiles.git
 cd dotfiles
