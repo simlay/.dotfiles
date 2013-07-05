@@ -73,3 +73,5 @@
 [user]
 	email = sebastian.imlay@gmail.com
 	name = Sebastian Imlay
+[push]
+	default = simple

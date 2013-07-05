@@ -6,9 +6,7 @@ get_col () {
 }
 
 du_sorted () {
-
     du "$@" | sort | get_col 2 | xargs du -hs
-
 }
 
 function average () {
