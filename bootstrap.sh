@@ -2,15 +2,15 @@
 cd "$(dirname "${BASH_SOURCE}")"
 
 function doIt() {
-    export exclude_list="echo setup.sh Monaco-Powerline.otf web_start.sh oh-my-zsh tmux-powerline .git .gitmodules .DS_store bootstrap.sh README.md more_python.txt .*swp . .. requirements.txt"
+    exclude_list="setup.sh Monaco-Powerline.otf web_start.sh oh-my-zsh tmux-powerline .git .gitmodules .DS_store bootstrap.sh README.md more_python.txt . .. requirements.txt"
 
     for i in .*; do
-        if echo $i | grep -v 'swp' > /dev/null 2> /dev/null && ! [[ $exclude_list =~ $i ]]
+        if ! [ -z ${i/*.swp/} ] && ! [[ $exclude_list =~ $i ]]
         then
-            if [ -d ~/$i ]; then
-                ln -s -h -i -F $(pwd)/$i ~
+            if [ -d ~/$i ]; then # ln is weird for directories.
+                ln -s -h -f $(pwd)/$i ~
             else
-                ln -s -h -i $(pwd)/$i ~/$i
+                ln -s -h -f $(pwd)/$i ~/$i
             fi
         fi
     done
