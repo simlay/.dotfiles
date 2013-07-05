@@ -7,16 +7,13 @@ function doIt() {
     for i in .*; do
         if echo $i | grep -v 'swp' > /dev/null 2> /dev/null && ! [[ $exclude_list =~ $i ]]
         then
-            ln -s -i $(pwd)/$i ~/$i
+            if [ -d ~/$i ]; then
+                ln -s -h -i -F $(pwd)/$i ~
+            else
+                ln -s -h -i $(pwd)/$i ~/$i
+            fi
         fi
     done
-
-    #rsync --exclude "setup.sh" --exclude "Monaco-Powerline.otf" --exclude "web_start.sh" \
-    #    --exclude "oh-my-zsh" --exclude "tmux-powerline" --exclude ".git/" \
-    #    --exclude ".gitmodules" \
-    #    --exclude ".DS_Store" --exclude "bootstrap.sh" --exclude "README.md" \
-    #    --exclude "requirements.txt" --exclude "more_python.txt" \
-    #    -av . ~
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
