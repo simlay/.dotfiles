@@ -8,9 +8,9 @@ function doIt() {
         if ! [ -z ${i/*.swp/} ] && ! [[ $exclude_list =~ $i ]]
         then
             if [ -d ~/$i ]; then # ln is weird for directories.
-                ln -s -h -f $(pwd)/$i ~
+                ln -s -i $(pwd)/$i ~
             else
-                ln -s -h -f $(pwd)/$i ~/$i
+                ln -s -i $(pwd)/$i ~/$i
             fi
         fi
     done
