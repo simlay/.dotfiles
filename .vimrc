@@ -66,7 +66,7 @@ set tags=./tags,tags,/Users/simlay/source/xnu-1699.22.81/tags
 set autoindent
 
 " Spaces are better than a tab character
-set expandtab
+" set expandtab
 set smarttab
 
 " Who wants an 8 character tab?  Not me!
@@ -296,7 +296,7 @@ endif
 
 
 " CtrlP Options
-"let g:ctrlp_map = '<leader>t'
+let g:ctrlp_map = '<leader>t'
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_max_files = 200000
 let g:ctrlp_clear_cache_on_exit = 0
@@ -313,7 +313,7 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'kien/ctrlp.vim'
 Bundle 'kien/rainbow_parentheses.vim'
-Bundle 'scrooloose/syntastic'
+"Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-surround'
 Bundle 'vim-scripts/AutoComplPop'
 Bundle 'Lokaltog/vim-easymotion'
@@ -323,11 +323,3 @@ Bundle 'kien/ctrlp.vim'
 if has("gui_running")
     Bundle 'Valloric/YouCompleteMe'
 endif
-
-" CtrlP Options
-"let g:ctrlp_map = '<leader>t'
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-let g:ctrlp_max_files = 200000
-let g:ctrlp_clear_cache_on_exit = 0
-"map <leader>b :CtrlPBuffer<CR>
-

@@ -32,6 +32,9 @@ fi
 alias l="ls -l ${colorflag}"
 alias ll="ls -l ${colorflag}"
 
+# List all files in non-colorized format.
+alias lsc='ls --color=never'
+
 # List all files colorized in long format, including dot files
 alias la="ls -la ${colorflag}"
 

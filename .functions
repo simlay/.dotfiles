@@ -6,15 +6,16 @@ get_col () {
 }
 
 du_sorted () {
-    du "$@" | sort | get_col 2 | xargs du -hs
+    du "$@" | sort -n | get_col 2 | xargs du -hs
 }
 
 function average () {
-    if [ $# -eq '0' ]; then
-        awk '{if(min==""){min=max=$1}; if($1>max) {max=$1}; if($1< min) {min=$1}; total+=$1; count+=1} END {print total/count, min, max}'
-    else
-        awk '{if(min==""){min=max=$1}; if($1>max) {max=$1}; if($1< min) {min=$1}; total+=$1; count+=1} END {print total/count, min, max}' $1
-    fi
+	if [ '0' -eq $# ]
+	then
+		awk '{print $1}' | awk '{s+=$1} END{print "Sum: "s, "\nNumber of lines : "NR, "\nAverage: "s/(NR)}'
+	else
+		awk '{print $1}' | awk '{s+=$1} END{print "Sum: "s, "\nNumber of lines : "NR, "\nAverage: "s/(NR)}' $1
+	fi
 }
 
 function get_shas_that_touched() {
