@@ -311,11 +311,10 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
-Bundle 'kien/ctrlp.vim'
 Bundle 'kien/rainbow_parentheses.vim'
-"Bundle 'scrooloose/syntastic'
+Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-surround'
-Bundle 'vim-scripts/AutoComplPop'
+"Bundle 'vim-scripts/AutoComplPop'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tpope/vim-fugitive'
 Bundle 'kien/ctrlp.vim'
@@ -323,3 +322,8 @@ Bundle 'kien/ctrlp.vim'
 if has("gui_running")
     Bundle 'Valloric/YouCompleteMe'
 endif
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
