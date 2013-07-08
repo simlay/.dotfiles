@@ -1,6 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_cnt =3
 let g:netrw_dirhist_1='/nail/home/simlay/pg/yelp-main/templates/signup'
 let g:netrw_dirhist_2='/nail/home/simlay/.vim'
 let g:netrw_dirhist_3='/nail/home/simlay/pg/yelp-main/yelp/component/data_ingestion/update_task_handlers'
-let g:netrw_dirhist_4='/Users/simlay/source/dotfiles/.vim/syntax'

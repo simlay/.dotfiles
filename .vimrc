@@ -301,6 +301,7 @@ let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_max_files = 200000
 let g:ctrlp_clear_cache_on_exit = 0
 "map <leader>b :CtrlPBuffer<CR>
+let g:syntastic_python_checkers = ['pyflakes']
 
 " Vundle setup
 if !isdirectory(expand("~/.vim/bundle/vundle/.git"))
@@ -314,7 +315,7 @@ Bundle 'gmarik/vundle'
 Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-surround'
-"Bundle 'vim-scripts/AutoComplPop'
+Bundle 'vim-scripts/AutoComplPop'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tpope/vim-fugitive'
 Bundle 'kien/ctrlp.vim'
@@ -326,4 +327,5 @@ au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
+execute pathogen#infect()
 
