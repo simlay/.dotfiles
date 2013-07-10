@@ -29,8 +29,19 @@ get_col () {
     done
 }
 
+get_line() {
+	if [ -t 0 ]; then
+		head -n $1 | tail -n 1
+	else
+		head -n $1 $2 | tail -n 1
+	fi
+}
+
 du_sorted () {
     du "$@" | sort -n | get_col 2 | xargs du -hs
+}
+function git_checkout_last() {
+	git checkout @{-1}
 }
 
 function average () {
