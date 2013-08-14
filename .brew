@@ -28,5 +28,16 @@ brew install tmux
 brew install nmap
 brew install readline
 
+# Install native apps
+brew tap phinze/homebrew-cask
+brew install brew-cask
+
+function installcask() {
+	brew cask install "${@}" 2> /dev/null
+}
+
+installcask iterm2
+installcask macvim
+
 # Remove outdated versions from the cellar
 brew cleanup

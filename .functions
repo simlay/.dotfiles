@@ -22,11 +22,15 @@ get_cols () {
 	unset column_list
 }
 
+git_modified () {
+	git status | grep modified | get_cols -1
+}
+
 get_col () {
-    for item in `awk "{print \\$$@}"`; do
-        printf $item
-        printf '\n'
-    done
+	for item in `awk "{print \\$$@}"`; do
+		printf $item
+		printf '\n'
+	done
 }
 
 get_line() {
