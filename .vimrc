@@ -60,13 +60,13 @@ syntax enable
 set grepprg=grep\ -nH\ $*
 " set tags=~/tags
 set tagstack
-set tags=./tags,tags,/Users/simlay/source/xnu-1699.22.81/tags
+"set tags=./tags,tags,/Users/simlay/source/xnu-1699.22.81/tags
 
 " Who doesn't like autoindent?
 set autoindent
 
 " Spaces are better than a tab character
-" set expandtab
+set expandtab
 set smarttab
 
 " Who wants an 8 character tab?  Not me!
@@ -301,7 +301,7 @@ let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_max_files = 200000
 let g:ctrlp_clear_cache_on_exit = 0
 map <leader>b :CtrlPBuffer<CR>
-let g:syntastic_python_checkers = ['pyflakes']
+let g:syntastic_python_checkers = ['pep8']
 
 " Vundle setup
 if !isdirectory(expand("~/.vim/bundle/vundle/.git"))
