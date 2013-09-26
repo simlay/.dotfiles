@@ -1,9 +1,16 @@
 get_cols () {
 
-	# Usage: get_cols [file_name] [column_num]
+	# Usage: get_cols [-F$separator] [file_name] [column_num]
+    # separator
+    separator=' '
 	column_list=""
 	for column_num in $@; do
 		[ -r $column_num ] && continue
+
+        if echo $column_num | grep '\-F' ; then
+            separator=$(echo $column_num | sed 's/-F//g' )
+            continue
+        fi
 
 		[ $column_num -lt '0' ] && column_num="(NF + 1 $column_num )" #Negative indices like python's array[-1]
 
@@ -14,12 +21,16 @@ get_cols () {
 	unset column_num
 
 	# Is the first parameter a file?
+    awk_string="BEGIN { FS = \"$separator\" } ; {print $column_list}"
+
 	if [ -r $1 ]; then
-		awk "{print $column_list}" $1
+		awk $awk_string $1
 	else
-		awk "{print $column_list}"
-	fi
+		awk "$awk_string"
+    fi
+
 	unset column_list
+    unset awk_string
 }
 
 git_modified () {
@@ -44,6 +55,7 @@ get_line() {
 du_sorted () {
     du "$@" | sort -n | get_col 2 | xargs du -hs
 }
+
 function git_checkout_last() {
 	git checkout @{-1}
 }
