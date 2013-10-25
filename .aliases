@@ -31,6 +31,7 @@ fi
 # List all files colorized in long format
 alias l="ls -l ${colorflag}"
 alias ll="ls -l ${colorflag}"
+alias tree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
 
 # List all files in non-colorized format.
 alias lsc='ls --color=never'
