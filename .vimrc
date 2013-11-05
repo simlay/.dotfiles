@@ -102,6 +102,18 @@ endif
 set wildmenu
 set wildmode=list:longest,full
 
+" no backup
+set nobackup
+set nowritebackup
+set noswapfile
+
+" ignore these
+" set wildignore=.svn,CVS,.git,.hg
+set wildignore+=*.o,*.a,*.class,*.mo,*.la,*.so,*.obj
+set wildignore+=*.sw*,*.jpg,*.png,*.xpm,*.gif
+set wildignore+=*.pyc,*templates/*.py,*.log
+
+
 " Enable mouse support in console
 set mouse=a
 
@@ -149,7 +161,6 @@ if has("gui_running")
 else
    "colorscheme default
    colorscheme xoria256
-   set nonumber
 endif
 
 "Status line gnarliness
@@ -302,6 +313,8 @@ let g:ctrlp_max_files = 200000
 let g:ctrlp_clear_cache_on_exit = 0
 map <leader>b :CtrlPBuffer<CR>
 let g:syntastic_python_checkers = ['pep8']
+let g:jedi#rename_command = "<leader>R"
+
 
 " Vundle setup
 if !isdirectory(expand("~/.vim/bundle/vundle/.git"))
@@ -310,22 +323,51 @@ endif
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
+set rtp+=~/.vim/powerline/powerline/bindings/vim
 
 Bundle 'gmarik/vundle'
 Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-surround'
-Bundle 'vim-scripts/AutoComplPop'
+"Bundle 'vim-scripts/AutoComplPop'
 Bundle 'Lokaltog/vim-easymotion'
+Bundle 'davidhalter/jedi-vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'kien/ctrlp.vim'
+Bundle 'wting/rust.vim'
+"Bundle 'wting/gitsessions.vim'
 
 if has("gui_running")
     Bundle 'Valloric/YouCompleteMe'
 endif
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+" Rainbow Parens {{{
+
+    Bundle 'kien/rainbow_parentheses.vim'
+
+    au VimEnter * RainbowParenthesesToggle
+    au Syntax * RainbowParenthesesLoadRound
+    au Syntax * RainbowParenthesesLoadSquare
+    au Syntax * RainbowParenthesesLoadBraces
+
+    let g:rbpt_colorpairs = [
+        \ ['brown',       'RoyalBlue3'],
+        \ ['Darkblue',    'SeaGreen3'],
+        \ ['darkgray',    'DarkOrchid3'],
+        \ ['darkgreen',   'firebrick3'],
+        \ ['darkcyan',    'RoyalBlue3'],
+        \ ['darkred',     'SeaGreen3'],
+        \ ['darkmagenta', 'DarkOrchid3'],
+        \ ['brown',       'firebrick3'],
+        \ ['gray',        'RoyalBlue3'],
+        \ ['black',       'SeaGreen3'],
+        \ ['darkmagenta', 'DarkOrchid3'],
+        \ ['Darkblue',    'firebrick3'],
+        \ ['darkgreen',   'RoyalBlue3'],
+        \ ['darkcyan',    'SeaGreen3'],
+        \ ['darkred',     'DarkOrchid3'],
+        \ ['red',         'firebrick3'],
+        \ ]
+
+" }}}
 execute pathogen#infect()
 
