@@ -6,6 +6,7 @@ export PATH="$HOME/bin:$PATH"
 # * ~/.extra can be used for other settings you don’t want to commit.
 for file in ~/.{path,exports,shared_exports,aliases,functions,extra,prompt,git-completion.bash}; do
 	[ -r "$file" ] && source "$file"
+    [ -d "$file" ] && source "$file/*"
 done
 unset file
 

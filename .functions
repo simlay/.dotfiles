@@ -1,3 +1,4 @@
+# vim:ft=sh
 get_cols () {
 
 	# Usage: get_cols [-F$separator] [file_name] [column_num]

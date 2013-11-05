@@ -1,3 +1,4 @@
+# vim:ft=sh
 # Easier navigation: .., ..., ...., ....., ~ and -
 alias ..="cd .."
 alias ...="cd ../.."

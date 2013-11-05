@@ -1,3 +1,4 @@
+# vim:ft=sh
 function add_to_front_of_path {
     export PATH=$@:`echo $PATH | sed "s|:*$@||g" | sed "s|^:||"`
 }
