@@ -6,6 +6,9 @@
 " Remove any trailing whitespace that is in the file
 autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
+au BufRead,BufNewFile *bash\-fc\-[0-9]\+ setfiletype sh
+
+
 " Restore cursor position to where it was before
 augroup JumpCursorOnEdit
    au!
@@ -56,10 +59,13 @@ set foldmethod=marker
 " Needed for Syntax Highlighting and stuff
 filetype off
 filetype plugin on
+filetype plugin indent on
+syntax on
 syntax enable
 set grepprg=grep\ -nH\ $*
 " set tags=~/tags
 set tagstack
+" set tags=./tags
 "set tags=./tags,tags,/Users/simlay/source/xnu-1699.22.81/tags
 
 " Who doesn't like autoindent?
@@ -133,7 +139,8 @@ set smartcase
 "inoremap jj <Esc>
 
 "nnoremap JJJJ <Nop>
-map <leader>r A<CR>import ipdb; ipdb.set_trace()<ESC>
+"map <leader>r A<CR>import ipdb; ipdb.set_trace()<ESC>
+map <leader>r A<CR>debugger;<ESC>
 
 " Incremental searching is sexy
 set incsearch
@@ -294,9 +301,6 @@ let Tlist_Inc_Winwidth = 0
 "}}}
 
 
-filetype plugin indent on
-syntax on
-
 
 
 if exists('+colorcolumn')
@@ -306,14 +310,6 @@ else
 endif
 
 
-" CtrlP Options
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-let g:ctrlp_max_files = 200000
-let g:ctrlp_clear_cache_on_exit = 0
-map <leader>b :CtrlPBuffer<CR>
-let g:syntastic_python_checkers = ['pep8']
-let g:jedi#rename_command = "<leader>R"
 
 
 " Vundle setup
@@ -321,25 +317,54 @@ if !isdirectory(expand("~/.vim/bundle/vundle/.git"))
 	!git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
 endif
 
+
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 set rtp+=~/.vim/powerline/powerline/bindings/vim
 
 Bundle 'gmarik/vundle'
-Bundle 'kien/rainbow_parentheses.vim'
-Bundle 'scrooloose/syntastic'
-Bundle 'tpope/vim-surround'
+
+" Syntastic"{{{
+    Bundle 'scrooloose/syntastic'
+    let g:syntastic_python_checkers = ['pep8']
+"}}}
+
+" Surround.vim"{{{
+    Bundle 'tpope/vim-surround'
+"}}}
+"
 "Bundle 'vim-scripts/AutoComplPop'
 Bundle 'Lokaltog/vim-easymotion'
-Bundle 'davidhalter/jedi-vim'
 Bundle 'tpope/vim-fugitive'
-Bundle 'kien/ctrlp.vim'
 Bundle 'wting/rust.vim'
+
+" TagBar "{{{
+    " Bundle 'majutsushi/tagbar'
+"}}}
+
+" gitsessions.
 "Bundle 'wting/gitsessions.vim'
 
-if has("gui_running")
-    Bundle 'Valloric/YouCompleteMe'
-endif
+" jedi-vim "{{{
+    Bundle 'davidhalter/jedi-vim'
+    let g:jedi#rename_command = "<leader>R"
+"}}}
+
+" YouCompleteMe "{{{
+    if has("gui_running")
+        Bundle 'Valloric/YouCompleteMe'
+    endif
+"}}}
+"
+" CtrlP {{{
+    Bundle 'kien/ctrlp.vim'
+    let g:ctrlp_map = '<c-p>'
+    let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+    let g:ctrlp_max_files = 200000
+    let g:ctrlp_clear_cache_on_exit = 0
+    map <leader>b :CtrlPBuffer<CR>
+"}}}
+
 " Rainbow Parens {{{
 
     Bundle 'kien/rainbow_parentheses.vim'

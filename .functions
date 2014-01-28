@@ -1,37 +1,95 @@
 # vim:ft=sh
+
+youtube_play() {
+    local_video_file=/tmp/video.flv
+    fifo_loc=/tmp/fifo
+    rm $local_video_file
+
+    if [[ ! -p $fifo_loc ]]; then
+        mkfifo $fifo_loc
+    fi
+
+    youtube-dl --no-part --max-quality 5 -o $local_video_file $1 > $fifo_loc & disown
+
+    counter=0
+
+    while ! grep '\[download\]' $fifo_loc; do
+
+        sleep 1
+        counter=$(($counter + 1))
+
+        if [ $counter -ge 10 ]; then
+            exit 1
+        fi
+    done
+
+    mplayer -vo null $local_video_file
+    rm $fifo_loc
+}
+
+histogram() {
+    if [ $# -lt 1 ]
+    then
+        echo "Usage: histogram  [field] [precision]"
+        return 0
+    fi
+
+    field=1
+    if [ $# -gt 1 ]
+    then
+        field=$2
+    fi
+
+    if [ $# -gt 2 ]
+    then
+        precision="."
+        for i in `seq 1 1 $3`
+        do
+            precision=$precision.
+        done
+
+        cat $1 | gsort -k $field -n -t ',' | cut -d ',' -f $field | gsed -e "s/\($precision\).*/\1/" | uniq -c
+    else
+        cat $1 | sort -k $field -n -t ',' | cut -d ',' -f $field | uniq -c
+    fi
+}
+
 get_cols () {
+    # Usage: get_cols [-F$separator] [file_name] [column_num]
+    # separator
+    separator=' '
+    column_list=""
+    for column_num in $@; do
+        [ -r $column_num ] && continue
 
-	# Usage: get_cols [-F$separator] [file_name] [column_num]
-	# separator
-	separator=' '
-	column_list=""
-	for column_num in $@; do
-		[ -r $column_num ] && continue
+        if echo $column_num | grep '\-F' ; then
+            separator=$(echo $column_num | sed 's/-F//g' )
+            continue
+        fi
 
-		if echo $column_num | grep '\-F' ; then
-			separator=$(echo $column_num | sed 's/-F//g' )
-			continue
-		fi
+        [ $column_num -lt '0' ] && column_num="(NF + 1 $column_num )" #Negative indices like python's array[-1]
 
-		[ $column_num -lt '0' ] && column_num="(NF + 1 $column_num )" #Negative indices like python's array[-1]
+        [ -z $column_list ] && column_num="\$$column_num" || column_num=",\$$column_num" # Place commas appropriately.
 
-		[ -z $column_list ] && column_num="\$$column_num" || column_num=",\$$column_num" # Place commas appropriately.
+        column_list="$column_list$column_num"
+    done
+    unset column_num
 
-		column_list="$column_list$column_num"
-	done
-	unset column_num
+    # Is the first parameter a file?
+    awk_string="BEGIN { FS = \"$separator\" } ; {print $column_list}"
 
-	# Is the first parameter a file?
-	awk_string="BEGIN { FS = \"$separator\" } ; {print $column_list}"
+    if [ -r $1 ]; then
+        awk $awk_string $1
+    else
+        awk "$awk_string"
+    fi
 
-	if [ -r $1 ]; then
-		awk $awk_string $1
-	else
-		awk "$awk_string"
-	fi
+    unset column_list
+    unset awk_string
+}
 
-	unset column_list
-	unset awk_string
+aggregate () {
+    awk "{sum += \$1} END { printf \"%d\n\", sum }"
 }
 
 git_modified () {
@@ -117,7 +175,7 @@ function fs() {
 hash git &>/dev/null
 if [ $? -eq 0 ]; then
     function diff() {
-	git diff --no-index --color-words "$@"
+    git diff --no-index --color-words "$@"
     }
 fi
 
