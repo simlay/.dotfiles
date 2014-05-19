@@ -329,11 +329,28 @@ Bundle 'gmarik/vundle'
     let g:syntastic_python_checkers = ['pep8']
 "}}}
 
+" ghcmod-vim"{{{
+    Bundle 'eagletmt/ghcmod-vim'
+    Bundle 'Shougo/vimproc.vim'
+    let g:ghcmod_ghc_options = ['-idir1', '-idir2']
+"}}}
+
+" vim-hdevtools"{{{
+    " Bundle 'bitc/vim-hdevtools'
+"}}}
+
 " Surround.vim"{{{
     Bundle 'tpope/vim-surround'
 "}}}
 "
 "Bundle 'vim-scripts/AutoComplPop'
+
+"" haskellmode-vim{{{
+    Bundle 'lukerandall/haskellmode-vim'
+    let g:haddock_browser = "open"
+    let g:haddock_browser_callformat = "%s %s"
+"}}}
+
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tpope/vim-fugitive'
 Bundle 'wting/rust.vim'
@@ -342,12 +359,13 @@ Bundle 'wting/rust.vim'
     " Bundle 'majutsushi/tagbar'
 "}}}
 
-" gitsessions.
-"Bundle 'wting/gitsessions.vim'
-
 " jedi-vim "{{{
     Bundle 'davidhalter/jedi-vim'
     let g:jedi#rename_command = "<leader>R"
+"}}}
+
+" julia-vim "{{{
+    Bundle 'JuliaLang/julia-vim'
 "}}}
 
 " YouCompleteMe "{{{

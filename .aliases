@@ -21,6 +21,10 @@ alias m="mate ."
 alias s="subl ."
 alias o="open"
 alias oo="open ."
+alias gateway="route -n get default | grep gateway | get_cols 2"
+alias sleepnow="osascript -e 'tell application \"System Events\" to sleep'"
+alias speedtest="wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test100.zip"
+alias date_clean="date '+%Y-%m-%d'"
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
