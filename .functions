@@ -54,6 +54,16 @@ histogram() {
     fi
 }
 
+cdn() {
+    num_up=$(echo $1 | grep -o "\." | wc -l)
+    updot="./"
+    for ((i=0;i<$((${num_up}-1));i++))
+    do
+        updot="$updot../"
+    done
+    cd $updot
+}
+
 get_cols () {
     # Usage: get_cols [-F$separator] [file_name] [column_num]
     # separator
