@@ -121,7 +121,7 @@ set wildignore+=*.pyc,*templates/*.py,*.log
 
 
 " Enable mouse support in console
-set mouse=a
+"set mouse=a
 
 " Got backspace?
 set backspace=2
@@ -139,8 +139,7 @@ set smartcase
 "inoremap jj <Esc>
 
 "nnoremap JJJJ <Nop>
-"map <leader>r A<CR>import ipdb; ipdb.set_trace()<ESC>
-map <leader>r A<CR>debugger;<ESC>
+map <leader>r A<CR>import ipdb; ipdb.set_trace()<ESC>
 
 " Incremental searching is sexy
 set incsearch
@@ -326,7 +325,7 @@ Bundle 'gmarik/vundle'
 
 " Syntastic"{{{
     Bundle 'scrooloose/syntastic'
-    let g:syntastic_python_checkers = ['pep8']
+    let g:syntastic_python_checkers = ['pyflakes']
 "}}}
 
 " Surround.vim"{{{
@@ -384,7 +383,6 @@ Bundle 'wting/rust.vim'
         \ ['darkmagenta', 'DarkOrchid3'],
         \ ['brown',       'firebrick3'],
         \ ['gray',        'RoyalBlue3'],
-        \ ['black',       'SeaGreen3'],
         \ ['darkmagenta', 'DarkOrchid3'],
         \ ['Darkblue',    'firebrick3'],
         \ ['darkgreen',   'RoyalBlue3'],
@@ -394,5 +392,6 @@ Bundle 'wting/rust.vim'
         \ ]
 
 " }}}
+"
 execute pathogen#infect()
 
