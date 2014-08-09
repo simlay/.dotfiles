@@ -26,6 +26,8 @@
 	# Undo a `git push`
 	undopush = push -f origin HEAD^:master
 	sui = submodule update --init
+	# Find pull request for a commit.
+	get-pull-request = "!p() { git log --merges --ancestry-path --oneline $1..master | grep 'pull request' | tail -n1; }; p"
 
 [core]
 	# Use custom `.gitignore` and `.gitattributes`
