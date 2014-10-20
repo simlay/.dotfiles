@@ -325,7 +325,7 @@ Bundle 'gmarik/vundle'
 
 " Syntastic"{{{
     Bundle 'scrooloose/syntastic'
-    let g:syntastic_python_checkers = ['pyflakes']
+    let g:syntastic_python_checkers = ['pyflakes', 'pep8']
 "}}}
 
 " ghcmod-vim"{{{
@@ -378,7 +378,9 @@ Bundle 'wting/rust.vim'
     let g:ctrlp_map = '<c-p>'
     let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
     let g:ctrlp_max_files = 200000
+    let g:ctrlp_reuse_window = 'netrw'
     let g:ctrlp_clear_cache_on_exit = 0
+    "let g:ctrlp_switch_buffer = 'e'
     map <leader>b :CtrlPBuffer<CR>
 "}}}
 
