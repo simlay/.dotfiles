@@ -412,6 +412,7 @@ Bundle 'wting/rust.vim'
         \ ]
 
 " }}}
-"
+
+Bundle "ekalinin/Dockerfile.vim"
 execute pathogen#infect()
 
