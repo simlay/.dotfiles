@@ -139,7 +139,10 @@ set smartcase
 "inoremap jj <Esc>
 
 "nnoremap JJJJ <Nop>
-map <leader>r A<CR>import ipdb; ipdb.set_trace()<ESC>
+"
+au BufRead,BufNewFile,BufEnter *.py map <leader>r A<CR>import ipdb; ipdb.set_trace()<ESC>
+au BufRead,BufNewFile,BufEnter *.js map <leader>r A<CR>debugger;<ESC>
+au BufRead,BufNewFile,BufEnter *.js set shiftwidth=2
 
 " Incremental searching is sexy
 set incsearch
