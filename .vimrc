@@ -141,8 +141,6 @@ set smartcase
 "nnoremap JJJJ <Nop>
 "
 au BufRead,BufNewFile,BufEnter *.py map <leader>r A<CR>import ipdb; ipdb.set_trace()<ESC>
-au BufRead,BufNewFile,BufEnter *.js map <leader>r A<CR>debugger;<ESC>
-au BufRead,BufNewFile,BufEnter *.js set shiftwidth=2
 
 " Incremental searching is sexy
 set incsearch
@@ -315,71 +313,89 @@ endif
 
 
 " Vundle setup
-if !isdirectory(expand("~/.vim/bundle/vundle/.git"))
-	!git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+let vundle_local_path = "~/.vim/bundle/Vundle.vim"
+if !isdirectory(expand("~/.vim/bundle/Vundle.vim"))
+	!git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 endif
 
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-set rtp+=~/.vim/powerline/powerline/bindings/vim
-
-Bundle 'gmarik/vundle'
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+"set rtp+=~/.vim/powerline/powerline/bindings/vim
+Plugin 'VundleVim/Vundle.vim'
 
 " Syntastic"{{{
-    Bundle 'scrooloose/syntastic'
-    let g:syntastic_python_checkers = ['pyflakes', 'pep8']
+    Plugin 'scrooloose/syntastic'
+    " au BufRead,BufNewFile,BufEnter *.py let g:syntastic_python_checkers = ['pyflakes', 'pep8']
+    au BufRead,BufNewFile,BufEnter *.js let g:syntastic_javascript_checkers = ['eslint']
+    au BufRead,BufNewFile,BufEnter *.jsx let g:syntastic_javascript_checkers = ['eslint']
 "}}}
 
-" ghcmod-vim"{{{
-    Bundle 'eagletmt/ghcmod-vim'
-    Bundle 'Shougo/vimproc.vim'
-    let g:ghcmod_ghc_options = ['-idir1', '-idir2']
-"}}}
+" Haskell Stuff"{{{
+" ghcmod-vim
+    " Bundle 'eagletmt/ghcmod-vim'
+    " Bundle 'Shougo/vimproc.vim'
+    " let g:ghcmod_ghc_options = ['-idir1', '-idir2']
 
-" vim-hdevtools"{{{
+
+" vim-hdevtools
     " Bundle 'bitc/vim-hdevtools'
+
+
+" haskellmode-vim
+    " Bundle 'lukerandall/haskellmode-vim'
+    " let g:haddock_browser = "open"
+    " let g:haddock_browser_callformat = "%s %s"
 "}}}
 
 " Surround.vim"{{{
-    Bundle 'tpope/vim-surround'
+    Plugin 'tpope/vim-surround'
 "}}}
 "
 "Bundle 'vim-scripts/AutoComplPop'
+let javascript_enable_domhtmlcss = 1
+let g:jsx_pragma_required = 1
+au BufRead,BufNewFile,BufEnter *.js map <leader>r A<CR>debugger;<ESC>
+" Fuck you
+au BufRead,BufNewFile,BufEnter *.jsx map <leader>r A<CR>debugger;<ESC>
+au BufRead,BufNewFile,BufEnter *.js set shiftwidth=2
+au BufRead,BufNewFile,BufEnter *.jsx set shiftwidth=2
 
-"" haskellmode-vim{{{
-    Bundle 'lukerandall/haskellmode-vim'
-    let g:haddock_browser = "open"
-    let g:haddock_browser_callformat = "%s %s"
-"}}}
+"Plugin 'Lokaltog/vim-easymotion'
+Plugin 'tpope/vim-fugitive'
 
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'tpope/vim-fugitive'
-Bundle 'wting/rust.vim'
+" Rust!
+Plugin 'rust-lang/rust.vim'
+Plugin 'racer-rust/vim-racer'
+" set hidden
+" let g:racer_cmd = "/Users/simlay/.cargo/bin/racer"
+
+" Plugin 'pangloss/vim-javascript'
+" Plugin 'mxw/vim-jsx'
 
 " TagBar "{{{
     " Bundle 'majutsushi/tagbar'
 "}}}
 
 " jedi-vim "{{{
-    Bundle 'davidhalter/jedi-vim'
-    let g:jedi#rename_command = "<leader>R"
-"}}}
-
-" julia-vim "{{{
-    Bundle 'JuliaLang/julia-vim'
+    " Bundle 'davidhalter/jedi-vim'
+    " let g:jedi#rename_command = "<leader>R"
 "}}}
 
 " YouCompleteMe "{{{
-    if has("gui_running")
-        Bundle 'Valloric/YouCompleteMe'
-    endif
+    " if has("gui_running")
+    "     Bundle 'Valloric/YouCompleteMe'
+    " endif
 "}}}
 "
 " CtrlP {{{
-    Bundle 'kien/ctrlp.vim'
+    Plugin 'kien/ctrlp.vim'
     let g:ctrlp_map = '<c-p>'
-    let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+    let g:ctrlp_custom_ignore = {
+      \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+      \ }
     let g:ctrlp_max_files = 200000
     let g:ctrlp_reuse_window = 'netrw'
     let g:ctrlp_clear_cache_on_exit = 0
@@ -387,9 +403,10 @@ Bundle 'wting/rust.vim'
     map <leader>b :CtrlPBuffer<CR>
 "}}}
 
+
 " Rainbow Parens {{{
 
-    Bundle 'kien/rainbow_parentheses.vim'
+    Plugin 'kien/rainbow_parentheses.vim'
 
     au VimEnter * RainbowParenthesesToggle
     au Syntax * RainbowParenthesesLoadRound
@@ -416,6 +433,10 @@ Bundle 'wting/rust.vim'
 
 " }}}
 
-Bundle "ekalinin/Dockerfile.vim"
-execute pathogen#infect()
+" Bundle "ekalinin/Dockerfile.vim"
+" Plugin 'isRuslan/vim-es6'
 
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+execute pathogen#infect()
