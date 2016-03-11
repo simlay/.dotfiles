@@ -1,5 +1,13 @@
 # vim:ft=sh
 
+ssh_tar() {
+    tar -pcz $1 | ssh $2 'tar -xz'
+}
+
+ssh_untar() {
+    ssh $2 "tar -pcz $1" | tar -pxz
+}
+
 youtube_play() {
     local_video_file=/tmp/video.flv
     fifo_loc=/tmp/fifo

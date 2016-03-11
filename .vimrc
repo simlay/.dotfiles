@@ -327,10 +327,10 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " Syntastic"{{{
-    Plugin 'scrooloose/syntastic'
+    "Plugin 'scrooloose/syntastic'
     " au BufRead,BufNewFile,BufEnter *.py let g:syntastic_python_checkers = ['pyflakes', 'pep8']
-    au BufRead,BufNewFile,BufEnter *.js let g:syntastic_javascript_checkers = ['eslint']
-    au BufRead,BufNewFile,BufEnter *.jsx let g:syntastic_javascript_checkers = ['eslint']
+    "au BufRead,BufNewFile,BufEnter *.js let g:syntastic_javascript_checkers = ['eslint']
+    "au BufRead,BufNewFile,BufEnter *.jsx let g:syntastic_javascript_checkers = ['eslint']
 "}}}
 
 " Haskell Stuff"{{{
@@ -367,8 +367,9 @@ au BufRead,BufNewFile,BufEnter *.jsx set shiftwidth=2
 Plugin 'tpope/vim-fugitive'
 
 " Rust!
-Plugin 'rust-lang/rust.vim'
-Plugin 'racer-rust/vim-racer'
+"Plugin 'rust-lang/rust.vim'
+"Plugin 'racer-rust/vim-racer'
+"Plugin 'fatih/vim-go'
 " set hidden
 " let g:racer_cmd = "/Users/simlay/.cargo/bin/racer"
 
@@ -434,9 +435,11 @@ Plugin 'racer-rust/vim-racer'
 " }}}
 
 " Bundle "ekalinin/Dockerfile.vim"
-" Plugin 'isRuslan/vim-es6'
+Plugin 'isRuslan/vim-es6'
+Plugin 'moll/vim-node'
+Plugin 'elzr/vim-json'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
-execute pathogen#infect()
+"execute pathogen#infect()

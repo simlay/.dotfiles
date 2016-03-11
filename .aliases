@@ -6,6 +6,12 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
+alias quake=~/Applications/ioquake3/ioquake3.app/Contents/MacOS/ioquake3
+alias fig="docker-compose"
+alias mplayer="mpv"
+alias docker-start="bash --login '/Applications/Docker/Docker Quickstart Terminal.app/Contents/Resources/Scripts/start.sh'"
+alias smyers="mpv 'https://www.youtube.com/watch?v=4k1xY7v8dDQ'"
+alias weather='curl http://wttr.in/seattle'
 
 # Shortcuts
 alias d="cd ~/Dropbox"
@@ -23,7 +29,7 @@ alias o="open"
 alias oo="open ."
 alias gateway="route -n get default | grep gateway | get_cols 2"
 alias sleepnow="osascript -e 'tell application \"System Events\" to sleep'"
-alias speedtest="wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test100.zip"
+#alias speedtest="wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test100.zip"
 alias date_clean="date '+%Y-%m-%d'"
 
 # Detect which `ls` flavor is in use
@@ -67,7 +73,7 @@ alias localip="ipconfig getifaddr en1"
 alias ips="ifconfig -a | grep -o 'inet6\? \(\([0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+\)\|[a-fA-F0-9:]\+\)' | sed -e 's/inet6* //'"
 
 # Enhanced WHOIS lookups
-alias whois="whois -h whois-servers.net"
+# alias whois="whois -h whois-servers.net"
 
 # Flush Directory Service cache
 alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
