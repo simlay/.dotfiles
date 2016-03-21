@@ -5,7 +5,7 @@ ssh_tar() {
 }
 
 ssh_untar() {
-    ssh $2 "tar -pcz $1" | tar -pxz
+    ssh $1 "tar -pcz $2" | tar -pxz
 }
 
 youtube_play() {

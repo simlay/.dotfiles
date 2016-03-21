@@ -360,8 +360,8 @@ let g:jsx_pragma_required = 1
 au BufRead,BufNewFile,BufEnter *.js map <leader>r A<CR>debugger;<ESC>
 " Fuck you
 au BufRead,BufNewFile,BufEnter *.jsx map <leader>r A<CR>debugger;<ESC>
-au BufRead,BufNewFile,BufEnter *.js set shiftwidth=2
-au BufRead,BufNewFile,BufEnter *.jsx set shiftwidth=2
+"au BufRead,BufNewFile,BufEnter *.js set shiftwidth=2
+"au BufRead,BufNewFile,BufEnter *.jsx set shiftwidth=2
 
 "Plugin 'Lokaltog/vim-easymotion'
 Plugin 'tpope/vim-fugitive'
@@ -438,6 +438,11 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'isRuslan/vim-es6'
 Plugin 'moll/vim-node'
 Plugin 'elzr/vim-json'
+Plugin 'fatih/vim-go'
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
