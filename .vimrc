@@ -434,7 +434,7 @@ Plugin 'tpope/vim-fugitive'
 
 " }}}
 
-" Bundle "ekalinin/Dockerfile.vim"
+Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'isRuslan/vim-es6'
 Plugin 'moll/vim-node'
 Plugin 'elzr/vim-json'
@@ -442,6 +442,16 @@ Plugin 'fatih/vim-go'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+
+
+Plugin 'ternjs/tern_for_vim'
+autocmd BufReadPost *.{js,coffee} nnoremap <buffer> K :TernDoc<CR>
+autocmd BufReadPost *.{js,coffee} nmap \td :TernDef<CR>
+autocmd BufReadPost *.{js,coffee} nmap \tt :TernType<CR>
+autocmd BufReadPost *.{js,coffee} nmap \tf :TernRefs<CR>
+autocmd BufReadPost *.{js,coffee} nmap \tr :TernRename<CR>
+
+"Plugin 'heavenshell/vim-jsdoc'
 
 
 " All of your Plugins must be added before the following line
