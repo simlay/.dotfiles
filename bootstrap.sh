@@ -16,7 +16,13 @@ function doIt() {
             fi
         fi
     done
+    mkdir -p ~/.config
+    for file in .config/*; do
+        ln -s -i $(pwd)/$file ~/
+    done
 }
+
+
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
     doIt
