@@ -38,5 +38,8 @@ xset s off
 # Increase the repeat rate
 xset r rate 200 30
 
+# Network manager applet
+nm-applet --sm-disable &
+
 #exec xterm -geometry 80x66+0+0 -name login
 exec awesome
