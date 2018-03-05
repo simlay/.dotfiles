@@ -9,9 +9,9 @@ alias -- -="cd -"
 alias quake=~/Applications/ioquake3/ioquake3.app/Contents/MacOS/ioquake3
 alias fig="docker-compose"
 alias mplayer="mpv"
-alias docker-start="bash --login '/Applications/Docker/Docker Quickstart Terminal.app/Contents/Resources/Scripts/start.sh'"
-alias smyers="mpv 'https://www.youtube.com/watch?v=4k1xY7v8dDQ'"
-alias weather='curl http://wttr.in/seattle'
+alias vim=nvim
+alias epoc_time="date '+%s'"
+
 
 # Shortcuts
 alias d="cd ~/Dropbox"

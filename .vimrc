@@ -136,7 +136,10 @@ set ignorecase
 set smartcase
 
 " This is totally awesome - remap jj to escape in insert mode.  You'll never type jj anyway, so it's great!
-"inoremap jj <Esc>
+inoremap jj <Esc>
+
+
+
 
 "nnoremap JJJJ <Nop>
 "
@@ -358,20 +361,44 @@ Plugin 'VundleVim/Vundle.vim'
 let javascript_enable_domhtmlcss = 1
 let g:jsx_pragma_required = 1
 au BufRead,BufNewFile,BufEnter *.js map <leader>r A<CR>debugger;<ESC>
+au BufRead,BufNewFile,BufEnter *.js set shiftwidth=2
+
+au BufRead,BufNewFile,BufEnter *.rb map <leader>r A<CR>binding.pry<ESC>
+au BufRead,BufNewFile,BufEnter *.rb set shiftwidth=2
 " Fuck you
-au BufRead,BufNewFile,BufEnter *.jsx map <leader>r A<CR>debugger;<ESC>
-"au BufRead,BufNewFile,BufEnter *.js set shiftwidth=2
+" au BufRead,BufNewFile,BufEnter *.jsx map <leader>r A<CR>debugger;<ESC>
 "au BufRead,BufNewFile,BufEnter *.jsx set shiftwidth=2
 
 "Plugin 'Lokaltog/vim-easymotion'
 Plugin 'tpope/vim-fugitive'
 
 " Rust!
-"Plugin 'rust-lang/rust.vim'
+Plugin 'rust-lang/rust.vim'
 "Plugin 'racer-rust/vim-racer'
-"Plugin 'fatih/vim-go'
-" set hidden
-" let g:racer_cmd = "/Users/simlay/.cargo/bin/racer"
+"let g:racer_cmd = "/Users/sebastian/.cargo/bin/racer"
+
+"Plugin 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+" let g:LanguageClient_serverCommands = {
+"     \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+"     \ 'python': ['pyls'],
+"     \ 'javascript': ['node', '/Users/sebastian/projects/javascript-typescript-langserver/lib/language-server-stdio.js'],
+"     \ }
+"
+" " Map renaming in python
+" autocmd FileType python nnoremap <buffer>
+"   \ <leader>lr :call LanguageClient_textDocument_rename()<cr>
+"
+" nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+" nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+" nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+
+" Automatically start language servers.
+let g:LanguageClient_autoStart = 1
+autocmd FileType python setlocal omnifunc=LanguageClient#complete
+
+Plugin 'Shougo/denite.nvim'
+
+set hidden
 
 " Plugin 'pangloss/vim-javascript'
 " Plugin 'mxw/vim-jsx'
@@ -392,17 +419,43 @@ Plugin 'tpope/vim-fugitive'
 "}}}
 "
 " CtrlP {{{
-    Plugin 'kien/ctrlp.vim'
-    let g:ctrlp_map = '<c-p>'
-    let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-      \ }
-    let g:ctrlp_max_files = 200000
-    let g:ctrlp_reuse_window = 'netrw'
-    let g:ctrlp_clear_cache_on_exit = 0
-    "let g:ctrlp_switch_buffer = 'e'
-    map <leader>b :CtrlPBuffer<CR>
+    " Plugin 'kien/ctrlp.vim'
+    " let g:ctrlp_map = '<c-p>'
+    " let g:ctrlp_custom_ignore = {
+    "   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+    "   \ }
+    " let g:ctrlp_max_files = 200000
+    " let g:ctrlp_reuse_window = 'netrw'
+    " let g:ctrlp_clear_cache_on_exit = 0
+    " "let g:ctrlp_switch_buffer = 'e'
+    " map <leader>b :CtrlPBuffer<CR>
 "}}}
+
+
+"Plugin '/usr/local/opt/fzf'
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plugin 'junegunn/fzf.vim'
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+let g:fzf_colors =
+            \ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+nmap <c-p> :Files<CR>
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 
 " Rainbow Parens {{{
@@ -439,9 +492,12 @@ Plugin 'isRuslan/vim-es6'
 Plugin 'moll/vim-node'
 Plugin 'elzr/vim-json'
 Plugin 'fatih/vim-go'
+Plugin 'nsf/gocode', {'rtp': 'nvim/'}
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+
+Plugin 'vim-ruby/vim-ruby'
 
 
 Plugin 'ternjs/tern_for_vim'
