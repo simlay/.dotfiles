@@ -9,7 +9,7 @@ alias -- -="cd -"
 alias quake=~/Applications/ioquake3/ioquake3.app/Contents/MacOS/ioquake3
 alias fig="docker-compose"
 alias mplayer="mpv"
-alias vim=nvim
+#alias vim=nvim
 alias epoc_time="date '+%s'"
 
 

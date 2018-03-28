@@ -96,10 +96,10 @@ set showmatch           " highlight block ends
 
 
 " Use english for spellchecking, but don't spellcheck by default
-if version >= 700
-   set spl=en spell
-   set nospell
-endif
+" if version >= 700
+"    set spl=en spell
+"    set nospell
+" endif
 
 " Real men use gcc
 "compiler gcc

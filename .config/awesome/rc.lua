@@ -62,7 +62,7 @@ run_once({ "urxvtd", "unclutter -root" })
 local chosen_theme = "multicolor"
 local modkey       = "Mod4"
 local altkey       = "Mod1"
-local terminal     = "urxvtc" or "xterm"
+local terminal     = "xfce4-terminal"
 local editor       = os.getenv("EDITOR") or "nano" or "vi"
 local gui_editor   = "gvim"
 local browser      = "firefox"

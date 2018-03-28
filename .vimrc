@@ -64,7 +64,7 @@ syntax on
 syntax enable
 set grepprg=grep\ -nH\ $*
 " set tags=~/tags
-set tagstack
+" set tagstack
 " set tags=./tags
 "set tags=./tags,tags,/Users/simlay/source/xnu-1699.22.81/tags
 
@@ -96,10 +96,10 @@ set showmatch           " highlight block ends
 
 
 " Use english for spellchecking, but don't spellcheck by default
-if version >= 700
-   set spl=en spell
-   set nospell
-endif
+" if version >= 700
+"    set spl=en spell
+"    set nospell
+" endif
 
 " Real men use gcc
 "compiler gcc
@@ -316,19 +316,23 @@ endif
 
 
 " Vundle setup
-let vundle_local_path = "~/.vim/bundle/Vundle.vim"
-if !isdirectory(expand("~/.vim/bundle/Vundle.vim"))
-	!git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-endif
+" let vundle_local_path = "~/.vim/bundle/Vundle.vim"
+" if !isdirectory(expand("~/.vim/bundle/Vundle.vim"))
+" 	!git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+" endif
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-"set rtp+=~/.vim/powerline/powerline/bindings/vim
-Plugin 'VundleVim/Vundle.vim'
+" set rtp+=~/.vim/bundle/Vundle.vim
+" call vundle#begin()
+" " set rtp+=~/.vim/powerline/powerline/bindings/vim
+" Plugin 'VundleVim/Vundle.vim'
+if !isdirectory(expand("~/.vim/plugged"))
+    !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+end
 
+call plug#begin('~/.vim/plugged')
 " Syntastic"{{{
     "Plugin 'scrooloose/syntastic'
     " au BufRead,BufNewFile,BufEnter *.py let g:syntastic_python_checkers = ['pyflakes', 'pep8']
@@ -354,7 +358,7 @@ Plugin 'VundleVim/Vundle.vim'
 "}}}
 
 " Surround.vim"{{{
-    Plugin 'tpope/vim-surround'
+    Plug 'tpope/vim-surround'
 "}}}
 "
 "Bundle 'vim-scripts/AutoComplPop'
@@ -369,39 +373,42 @@ au BufRead,BufNewFile,BufEnter *.rb set shiftwidth=2
 " au BufRead,BufNewFile,BufEnter *.jsx map <leader>r A<CR>debugger;<ESC>
 "au BufRead,BufNewFile,BufEnter *.jsx set shiftwidth=2
 
-"Plugin 'Lokaltog/vim-easymotion'
-Plugin 'tpope/vim-fugitive'
+"Plug 'Lokaltog/vim-easymotion'
+Plug 'tpope/vim-fugitive'
 
 " Rust!
-Plugin 'rust-lang/rust.vim'
-"Plugin 'racer-rust/vim-racer'
+Plug 'rust-lang/rust.vim'
+"Plug 'racer-rust/vim-racer'
 "let g:racer_cmd = "/Users/sebastian/.cargo/bin/racer"
 
-"Plugin 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
-" let g:LanguageClient_serverCommands = {
-"     \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-"     \ 'python': ['pyls'],
-"     \ 'javascript': ['node', '/Users/sebastian/projects/javascript-typescript-langserver/lib/language-server-stdio.js'],
-"     \ }
-"
-" " Map renaming in python
-" autocmd FileType python nnoremap <buffer>
-"   \ <leader>lr :call LanguageClient_textDocument_rename()<cr>
-"
-" nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-" nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-" nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': './install.sh'
+    \ }
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+    \ 'python': ['pyls'],
+    \ 'javascript': ['node', '/Users/sebastian/projects/javascript-typescript-langserver/lib/language-server-stdio.js'],
+    \ }
+
+" Map renaming in python
+autocmd FileType python nnoremap <buffer>
+  \ <leader>lr :call LanguageClient_textDocument_rename()<cr>
+
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
 " Automatically start language servers.
 let g:LanguageClient_autoStart = 1
 autocmd FileType python setlocal omnifunc=LanguageClient#complete
 
-Plugin 'Shougo/denite.nvim'
+Plug 'Shougo/denite.nvim'
 
 set hidden
 
-" Plugin 'pangloss/vim-javascript'
-" Plugin 'mxw/vim-jsx'
+" Plug 'pangloss/vim-javascript'
+" Plug 'mxw/vim-jsx'
 
 " TagBar "{{{
     " Bundle 'majutsushi/tagbar'
@@ -419,7 +426,7 @@ set hidden
 "}}}
 "
 " CtrlP {{{
-    " Plugin 'kien/ctrlp.vim'
+    " Plug 'kien/ctrlp.vim'
     " let g:ctrlp_map = '<c-p>'
     " let g:ctrlp_custom_ignore = {
     "   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
@@ -432,13 +439,14 @@ set hidden
 "}}}
 
 
-"Plugin '/usr/local/opt/fzf'
-Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plugin 'junegunn/fzf.vim'
+"Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
+
 let g:fzf_colors =
             \ { 'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
@@ -455,12 +463,27 @@ let g:fzf_colors =
   \ 'header':  ['fg', 'Comment'] }
 
 nmap <c-p> :Files<CR>
-" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
+if executable('ag')
+  " Use Ag over Grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag --literal --files-with-matches --nocolor --hidden -g "" %s'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  "let g:ctrlp_use_caching = 0
+
+  if !exists(":Ag")
+    command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+    nnoremap \ :Ag<SPACE>
+  endif
+endif
 
 
 " Rainbow Parens {{{
 
-    Plugin 'kien/rainbow_parentheses.vim'
+    Plug 'kien/rainbow_parentheses.vim'
 
     au VimEnter * RainbowParenthesesToggle
     au Syntax * RainbowParenthesesLoadRound
@@ -487,30 +510,32 @@ nmap <c-p> :Files<CR>
 
 " }}}
 
-Plugin 'ekalinin/Dockerfile.vim'
-Plugin 'isRuslan/vim-es6'
-Plugin 'moll/vim-node'
-Plugin 'elzr/vim-json'
-Plugin 'fatih/vim-go'
-Plugin 'nsf/gocode', {'rtp': 'nvim/'}
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'ekalinin/Dockerfile.vim'
+Plug 'isRuslan/vim-es6'
+Plug 'moll/vim-node'
+Plug 'elzr/vim-json'
+Plug 'fatih/vim-go'
+Plug 'nsf/gocode', {'rtp': 'nvim/'}
+Plug 'editorconfig/editorconfig-vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
-Plugin 'vim-ruby/vim-ruby'
-
-
-Plugin 'ternjs/tern_for_vim'
-autocmd BufReadPost *.{js,coffee} nnoremap <buffer> K :TernDoc<CR>
-autocmd BufReadPost *.{js,coffee} nmap \td :TernDef<CR>
-autocmd BufReadPost *.{js,coffee} nmap \tt :TernType<CR>
-autocmd BufReadPost *.{js,coffee} nmap \tf :TernRefs<CR>
-autocmd BufReadPost *.{js,coffee} nmap \tr :TernRename<CR>
-
-"Plugin 'heavenshell/vim-jsdoc'
+Plug 'vim-ruby/vim-ruby'
 
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
+" Plug 'ternjs/tern_for_vim'
+" autocmd BufReadPost *.{js,coffee} nnoremap <buffer> K :TernDoc<CR>
+" autocmd BufReadPost *.{js,coffee} nmap \td :TernDef<CR>
+" autocmd BufReadPost *.{js,coffee} nmap \tt :TernType<CR>
+" autocmd BufReadPost *.{js,coffee} nmap \tf :TernRefs<CR>
+" autocmd BufReadPost *.{js,coffee} nmap \tr :TernRename<CR>
+
+"Plug 'heavenshell/vim-jsdoc'
+
+
+" All of your Plugs must be added before the following line
+"call vundle#end()            " required
+call plug#end()
+
 filetype plugin indent on    " required
 "execute pathogen#infect()
