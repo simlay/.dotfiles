@@ -4,12 +4,13 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
 alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
-alias quake=~/Applications/ioquake3/ioquake3.app/Contents/MacOS/ioquake3
+alias quake="/usr/local/Caskroom/ioquake3/1.36/ioquake3/ioquake3.app/Contents/MacOS/ioquake3"
 alias fig="docker-compose"
 alias mplayer="mpv"
-alias vim=nvim
+#alias vim=nvim
 alias epoc_time="date '+%s'"
 
 
