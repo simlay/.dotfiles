@@ -314,8 +314,6 @@ endif
 
 
 
-
-
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -351,7 +349,10 @@ call plug#begin('~/.vim/plugged')
 " Surround.vim"{{{
     Plug 'tpope/vim-surround'
 "}}}
-"
+
+
+Plug 'pest-parser/pest.vim'
+Plug 'reasonml-editor/vim-reason-plus'
 "Bundle 'vim-scripts/AutoComplPop'
 let javascript_enable_domhtmlcss = 1
 let g:jsx_pragma_required = 1
@@ -372,23 +373,25 @@ Plug 'rust-lang/rust.vim'
 "Plug 'racer-rust/vim-racer'
 "let g:racer_cmd = "/Users/sebastian/.cargo/bin/racer"
 
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': './install.sh'
-    \ }
+Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'make release'}
+" \ 'rust': ['ra_lsp_server'],
 let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+    \ 'rust': ['rustup', 'run', 'stable', 'rls'],
     \ 'python': ['pyls'],
     \ 'javascript': ['node', '/Users/sebastian/projects/javascript-typescript-langserver/lib/language-server-stdio.js'],
+    \ 'reason': ['/usr/local/bin/ocaml-language-server'],
     \ }
+
 let g:LanguageClient_rootMarkers = {
     \ 'javascript': ['project.json'],
     \ 'rust': ['Cargo.toml'],
     \ }
 
-" Map renaming in python
-autocmd FileType python nnoremap <buffer>
-  \ <leader>lr :call LanguageClient_textDocument_rename()<cr>
+Plug 'Shougo/deoplete.nvim'
+
+
+
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
@@ -399,6 +402,8 @@ let g:LanguageClient_autoStart = 1
 autocmd FileType python setlocal omnifunc=LanguageClient#complete
 
 Plug 'Shougo/denite.nvim'
+
+Plug 'scrooloose/nerdtree'
 
 set hidden
 
@@ -515,6 +520,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 Plug 'vim-ruby/vim-ruby'
+Plug 'keith/swift.vim'
 
 
 " Plug 'ternjs/tern_for_vim'
