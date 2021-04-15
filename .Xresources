@@ -11,7 +11,7 @@
 ! URxvt*color0: rgb:28/28/28
 !
 !
-Xft.dpi: 220.0
+Xft.dpi: 150.0
 Xft.autohint: 0
 Xft.lcdfilter:  lcddefault
 Xft.hintstyle:  hintfull
@@ -69,8 +69,8 @@ rofi.color-normal: ROFI1, ROFITEXT, ROFI1, ROFI2, _YELLOW
 ! URxvt
 ! ------------------------------------------------------------------------------
 urxvt.saveLines: 1000000
-URxvt.font:     xft:source code pro:size=11:antialias=true
-URxvt.boldFont: xft:source code pro:bold:size=11:antialias=true
+urxvt.font:     xft:source code pro:size=11:antialias=true
+urxvt.boldFont: xft:source code pro:bold:size=11:antialias=true
 
 ! Base16 Default Dark
 ! Scheme: Chris Kempson (http://chriskempson.com)

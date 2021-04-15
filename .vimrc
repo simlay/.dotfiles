@@ -375,7 +375,7 @@ Plug 'rust-lang/rust.vim'
 "let g:racer_cmd = "/Users/sebastian/.cargo/bin/racer"
 
 Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': '0.1.155',
+    \ 'branch': '0.1.161',
     \ 'do': './install.sh'
     \ }
     "\ 'rust': ['/home/simlay/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rls'],
@@ -387,8 +387,7 @@ let g:LanguageClient_serverCommands = {
     \ 'typescript': ['node', '/home/simlay/projects/javascript-typescript-langserver/lib/language-server-stdio.js'],
     \ }
 let g:LanguageClient_rootMarkers = {
-    \ 'javascript': ['project.json'],
-    \ 'typescript': ['tsconfig.json'],
+    \ 'javascript': ['project.json', 'tsconfig.json'],
     \ 'rust': ['Cargo.toml'],
     \ }
 
@@ -396,9 +395,15 @@ let g:LanguageClient_rootMarkers = {
 autocmd FileType python nnoremap <buffer>
   \ <leader>lr :call LanguageClient_textDocument_rename()<cr>
 
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+
+"nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+"nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+"nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+nmap <silent>K <Plug>(lcn-hover)
+nmap <silent> gd <Plug>(lcn-definition)
+nmap <silent> <F2> <Plug>(lcn-rename)
+nmap <silent> <F3> <Plug>(lcn-references)
+nmap <F5> <Plug>(lcn-menu)
 
 " Automatically start language servers.
 let g:LanguageClient_autoStart = 1

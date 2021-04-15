@@ -1,7 +1,9 @@
 #!/bin/sh
+set -e
 
 userresources=$HOME/.Xresources
 usermodmap=$HOME/.Xmodmap
+xrandrrc=$HOME/.xrandrrc
 sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
 
@@ -23,6 +25,10 @@ if [ -f "$usermodmap" ]; then
     xmodmap "$usermodmap"
 fi
 
+if [ -f "$xrandrrc" ]; then
+    sh $xrandrrc
+fi
+
 # start some nice programs
 
 if [ -d /etc/X11/xinit/xinitrc.d ] ; then
@@ -36,10 +42,14 @@ setterm -blank 0 -powersave off -powerdown 0
 xset s off
 
 # Increase the repeat rate
-xset r rate 200 30
+xset r rate 175 40
 
 # Network manager applet
 nm-applet --sm-disable &
+setxkbmap dvorak
+
+pasystray & disown
+#systemctl --user restart redshift
 
 #exec xterm -geometry 80x66+0+0 -name login
 exec awesome
