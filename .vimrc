@@ -390,6 +390,10 @@ let g:LanguageClient_rootMarkers = {
     \ 'javascript': ['project.json', 'tsconfig.json'],
     \ 'rust': ['Cargo.toml'],
     \ }
+let g:LanguageClient_enableExtensions = {
+    \ 'go': v:false,
+    \ 'rust': v:true,
+    \ }
 
 " Map renaming in python
 autocmd FileType python nnoremap <buffer>
@@ -407,6 +411,7 @@ nmap <F5> <Plug>(lcn-menu)
 
 " Automatically start language servers.
 let g:LanguageClient_autoStart = 1
+"let g:LanguageClient_loggingFile = '/tmp/LanguageClient.log'
 autocmd FileType python setlocal omnifunc=LanguageClient#complete
 
 Plug 'Shougo/denite.nvim'
