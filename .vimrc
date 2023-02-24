@@ -204,23 +204,20 @@ endfunction
 
 "{{{ Write a session.
 function! Wsession()
-	return ":mksession! ~/.vim/mysession.vim"
+    return ":mksession! ~/.vim/mysession.vim"
 endfunction
 "}}}
 
 
 "{{{ Load Session
 function! Lsession()
-	return ":mksession! ~/.vim/mysession.vim"
+    return ":mksession! ~/.vim/mysession.vim"
 endfunction
 "}}}
 
 "}}}
 
 "{{{ Mappings
-
-" Open the TagList Plugin <F3>
-nnoremap <silent> <F3> :Tlist<CR>
 
 " New Tab
 " nnoremap <silent> <C-t> :tabnew<CR>
@@ -370,38 +367,115 @@ Plug 'tpope/vim-fugitive'
 
 " Rust!
 Plug 'rust-lang/rust.vim'
-"Plug 'racer-rust/vim-racer'
-"let g:racer_cmd = "/Users/sebastian/.cargo/bin/racer"
-
-Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'make release'}
-" \ 'rust': ['ra_lsp_server'],
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rustup', 'run', 'stable', 'rls'],
-    \ 'python': ['pyls'],
-    \ 'javascript': ['node', '/Users/sebastian/projects/javascript-typescript-langserver/lib/language-server-stdio.js'],
-    \ 'reason': ['/usr/local/bin/ocaml-language-server'],
-    \ }
-
-let g:LanguageClient_rootMarkers = {
-    \ 'javascript': ['project.json'],
-    \ 'rust': ['Cargo.toml'],
-    \ }
-
 Plug 'Shougo/deoplete.nvim'
 
-
-
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+"Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'make release'}
+"let g:LanguageClient_serverCommands = {
+"    \ 'rust': ['rust-analyzer'],
+"    \ 'python': ['pyls'],
+"    \ 'javascript': ['node', '/Users/sebastian/projects/javascript-typescript-langserver/lib/language-server-stdio.js'],
+"    \ 'reason': ['/usr/local/bin/ocaml-language-server'],
+"    \ }
+"
+"let g:LanguageClient_rootMarkers = {
+"    \ 'javascript': ['project.json'],
+"    \ 'rust': ['Cargo.toml'],
+"    \ }
+"
+"nmap <silent> K <Plug>(lcn-hover)
+"nmap <silent> gd <Plug>(lcn-definition)
+"nmap <silent> <F5> <Plug>(lcn-menu)
+"nmap <silent> <F4> <Plug>(lcn-highlight)
+"nmap <silent> <F3> <Plug>(lcn-references)
+"nmap <silent> <F2> <Plug>(lcn-rename)
+"nmap <silent> <F1> <Plug>(lcn-code-lens-action)
+"let g:LanguageClient_autoStart = 1
+"autocmd FileType python setlocal omnifunc=LanguageClient#complete
 
 " Automatically start language servers.
-let g:LanguageClient_autoStart = 1
-autocmd FileType python setlocal omnifunc=LanguageClient#complete
+"let g:LanguageClient_autoStart = 1
+
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+
+let g:asyncomplete_auto_popup = 0
+let g:lsp_diagnostics_enabled = 1
+let g:lsp_diagnostics_virtual_text_enabled = 0
+let g:lsp_log_verbose = 1
+let g:lsp_log_file = expand('/tmp/vim-lsp.log')
+"let g:asyncomplete_log_file = expand('/tmp/asyncomplete.log')
+let g:lsp_hover_ui = 'preview'
+let g:lsp_diagnostics_float_cursor = 1
+let g:lsp_diagnostics_float_delay = 500
+imap <c-space> <Plug>(asyncomplete_force_refresh)
+
+" Go
+au User lsp_setup call lsp#register_server({
+            \ 'name': 'gopls',
+            \ 'cmd': {server_info->['gopls']},
+            \ 'allowlist': ['go']
+            \ })
+autocmd FileType go setlocal omnifunc=lsp#complete
+
+" Javascript and Typescript
+au User lsp_setup call lsp#register_server({
+            \ 'name': 'javascript-ls',
+            \ 'cmd': {server_info->['/home/simlay/projects/javascript-typescript-langserver/lib/language-server-stdio.js']},
+            \ 'allowlist': ['javascript']
+            \ })
+
+au User lsp_setup call lsp#register_server({
+            \ 'name': 'typescript-language-server',
+            \ 'cmd': {server_info->['/Users/simlay/.local/share/vim-lsp-settings/servers/typescript-language-server/typescript-language-server', '--stdio']},
+            \ 'allowlist': ['typescript']
+            \ })
+" autocmd FileType javascript setlocal omnifunc=lsp#complete
+" autocmd FileType typescript setlocal omnifunc=lsp#complete
+au User lsp_setup call lsp#register_server({
+            \ 'name': 'vim-language-server',
+            \ 'cmd': {server_info->['/home/simlay/.local/share/vim-lsp-settings/servers/vim-language-server/vim-language-server', '--stdio']},
+            \ 'allowlist': ['vimscript', 'vim']
+            \ })
+
+" Rust
+au User lsp_setup call lsp#register_server({
+            \ 'name': 'rust-analyzer',
+            \ 'cmd': {server_info->['rust-analyzer']},
+            \ 'allowlist': ['rust']
+            \ })
+autocmd FileType rust setlocal omnifunc=lsp#complete
+
+" au User lsp_setup call lsp#register_server({ 'name': 'pylsp', 'cmd': {server_info->['pylsp']}, 'allowlist': ['python'] })
+au User lsp_setup call lsp#register_server({ 'name': 'pyright-langserver', 'cmd': {server_info->['pyright-langserver','--stdio']}, 'allowlist': ['python'] })
+autocmd FileType go setlocal omnifunc=lsp#complete
+setlocal omnifunc=lsp#complete
+setlocal signcolumn=yes
+
+" nmap <F5> :LspCodeAction<CR>
+nmap <silent> <F6> <plug>(lsp-status)
+nmap <silent> <F5> <plug>(lsp-code-action)
+nmap <silent> <F4> <plug>(lsp-document-diagnostics)
+nmap <silent> <F3> <Plug>(lsp-references)
+nmap <silent> <F2> <Plug>(lsp-rename)
+nmap <silent> <F1> <Plug>(lsp-code-lens)
+nmap <silent> K <Plug>(lsp-hover)
+nmap <silent> gd <Plug>(lsp-definition)
+nmap <silent> gi <Plug>(lsp-implementation)
+nmap <buffer> gc <Plug>(lsp-type-definition)
+nmap <buffer> gs <Plug>(lsp-document-symbol-search)
+nmap <buffer> gS <Plug>(lsp-workspace-symbol-search)
+nmap <buffer> [g <plug>(lsp-previous-diagnostic)
+nmap <buffer> ]g <plug>(lsp-next-diagnostic)
+
+highlight lspReference ctermfg=red guifg=red ctermbg=green guibg=green
+
+Plug 'pearofducks/ansible-vim'
+Plug 'vim-scripts/applescript.vim'
+
+Plug 'cespare/vim-toml', { 'branch': 'main' }
 
 Plug 'Shougo/denite.nvim'
+Plug 'Shougo/deoplete.nvim'
 
 Plug 'scrooloose/nerdtree'
 
