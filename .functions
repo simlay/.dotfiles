@@ -1,27 +1,65 @@
 # vim:ft=sh
 
+ios_runtime() {
+    xcrun simctl list -j runtimes ios | jq -r '.[] | sort_by(.identifier)[0].identifier'
+}
+
+ios_devices() {
+    xcrun simctl list -j devices ios | jq ".devices.\"$(ios_runtime)\"" | jq 'sort_by(.deviceTypeIdentifier)'
+}
+
+ios_devices_booted() {
+    ios_devices | jq '[.[] | select(.state == "Booted")]'
+}
+
+ios_devices_shutdown() {
+    ios_devices | jq '[.[] | select(.state == "Shutdown")]'
+}
+
+ios_devices_get_id() {
+    booted=$(ios_devices_booted)
+    if [ "$booted" != "[]" ]; then
+        echo $booted | jq -r '.[0].udid'
+    else
+        device_id=$(ios_devices_shutdown | jq -r '.[0].udid')
+        xcrun simctl boot $device_id
+        echo $device_id
+    fi
+}
+
+
 journal_pass() {
     pass edit Journal/$(date +%Y/%m/%d)/entry.txt
 }
 
 
 fix_bluetooth() {
-	pids="$( ps -A | grep -iE '(blued|coreaudiod|bluetoothaudiod)' | grep -v grep | cut -c 1-90 | cut -c 1-6 )"
-	echo sudo renice -10 $pids
-	sudo renice -10 $pids
+    pids="$( ps -A | grep -iE '(blued|coreaudiod|bluetoothaudiod)' | grep -v grep | cut -c 1-90 | cut -c 1-6 )"
+    echo sudo renice -10 $pids
+    sudo renice -10 $pids
 
+}
+update-rust-analyzer() {
+    pushd .
+    cd ~/Downloads/
+    gh release -R rust-lang/rust-analyzer download -p '*-aarch64-apple-darwin.gz'
+    gunzip rust-analyzer-aarch64-apple-darwin.gz
+    chmod +x rust-analyzer-aarch64-apple-darwin
+    ./rust-analyzer-aarch64-apple-darwin --version
+    mv ./rust-analyzer-aarch64-apple-darwin ~/.cargo/bin/rust-analyzer
+    popd
 }
 
 random_words() {
-	WORDFILE="/usr/share/dict/words"
-	NUMWORDS=$1
-	#Number of lines in $WORDFILE
-	tL=`awk 'NF!=0 {++c} END {print c}' $WORDFILE`
-	for i in `seq $NUMWORDS`
-	do
-		rnum=$((RANDOM%$tL+1))
+    WORDFILE="/usr/share/dict/words"
+    NUMWORDS=$1
+    #Number of lines in $WORDFILE
+    tL=`awk 'NF!=0 {++c} END {print c}' $WORDFILE`
+    for i in `seq $NUMWORDS`
+    do
+        rnum=$((RANDOM%$tL+1))
         echo -n $(sed -n "$rnum p" $WORDFILE)' '
-	done
+    done
 }
 
 ssh_tar() {
