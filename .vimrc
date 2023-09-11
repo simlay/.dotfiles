@@ -408,46 +408,8 @@ let g:lsp_hover_ui = 'preview'
 let g:lsp_diagnostics_float_cursor = 1
 let g:lsp_diagnostics_float_delay = 500
 imap <c-space> <Plug>(asyncomplete_force_refresh)
-
-" Go
-au User lsp_setup call lsp#register_server({
-            \ 'name': 'gopls',
-            \ 'cmd': {server_info->['gopls']},
-            \ 'allowlist': ['go']
-            \ })
-autocmd FileType go setlocal omnifunc=lsp#complete
-
-" Javascript and Typescript
-au User lsp_setup call lsp#register_server({
-            \ 'name': 'javascript-ls',
-            \ 'cmd': {server_info->['/home/simlay/projects/javascript-typescript-langserver/lib/language-server-stdio.js']},
-            \ 'allowlist': ['javascript']
-            \ })
-
-au User lsp_setup call lsp#register_server({
-            \ 'name': 'typescript-language-server',
-            \ 'cmd': {server_info->['/Users/simlay/.local/share/vim-lsp-settings/servers/typescript-language-server/typescript-language-server', '--stdio']},
-            \ 'allowlist': ['typescript']
-            \ })
-" autocmd FileType javascript setlocal omnifunc=lsp#complete
-" autocmd FileType typescript setlocal omnifunc=lsp#complete
-au User lsp_setup call lsp#register_server({
-            \ 'name': 'vim-language-server',
-            \ 'cmd': {server_info->['/home/simlay/.local/share/vim-lsp-settings/servers/vim-language-server/vim-language-server', '--stdio']},
-            \ 'allowlist': ['vimscript', 'vim']
-            \ })
-
-" Rust
-au User lsp_setup call lsp#register_server({
-            \ 'name': 'rust-analyzer',
-            \ 'cmd': {server_info->['rust-analyzer']},
-            \ 'allowlist': ['rust']
-            \ })
 autocmd FileType rust setlocal omnifunc=lsp#complete
 
-" au User lsp_setup call lsp#register_server({ 'name': 'pylsp', 'cmd': {server_info->['pylsp']}, 'allowlist': ['python'] })
-au User lsp_setup call lsp#register_server({ 'name': 'pyright-langserver', 'cmd': {server_info->['pyright-langserver','--stdio']}, 'allowlist': ['python'] })
-autocmd FileType go setlocal omnifunc=lsp#complete
 setlocal omnifunc=lsp#complete
 setlocal signcolumn=yes
 
@@ -461,7 +423,7 @@ nmap <silent> <F1> <Plug>(lsp-code-lens)
 nmap <silent> K <Plug>(lsp-hover)
 nmap <silent> gd <Plug>(lsp-definition)
 nmap <silent> gi <Plug>(lsp-implementation)
-nmap <buffer> gc <Plug>(lsp-type-definition)
+nmap <buffer> gy <Plug>(lsp-type-definition)
 nmap <buffer> gs <Plug>(lsp-document-symbol-search)
 nmap <buffer> gS <Plug>(lsp-workspace-symbol-search)
 nmap <buffer> [g <plug>(lsp-previous-diagnostic)
@@ -471,6 +433,7 @@ highlight lspReference ctermfg=red guifg=red ctermbg=green guibg=green
 
 Plug 'pearofducks/ansible-vim'
 Plug 'vim-scripts/applescript.vim'
+Plug 'jremmen/vim-ripgrep'
 
 Plug 'cespare/vim-toml', { 'branch': 'main' }
 
