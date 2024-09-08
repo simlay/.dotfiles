@@ -431,6 +431,7 @@ else
     nmap <silent> <F2> <Plug>(lsp-rename)
     nmap <silent> <F1> <Plug>(lsp-code-lens)
     nmap <silent> K <Plug>(lsp-hover)
+    "nmap <silent> K <Plug>(lsp-rust-expand-macro)
     nmap <silent> gd <Plug>(lsp-definition)
     nmap <silent> gi <Plug>(lsp-implementation)
     nmap <buffer> gy <Plug>(lsp-type-definition)
@@ -441,6 +442,8 @@ else
 endif
 
 highlight lspReference ctermfg=red guifg=red ctermbg=green guibg=green
+Plug 'ruanyl/vim-gh-line'
+let g:gh_open_command = 'open -a firefox '
 
 Plug 'pearofducks/ansible-vim'
 Plug 'vim-scripts/applescript.vim'
@@ -559,8 +562,6 @@ endif
 " }}}
 
 Plug 'ekalinin/Dockerfile.vim'
-Plug 'isRuslan/vim-es6'
-Plug 'moll/vim-node'
 Plug 'elzr/vim-json'
 Plug 'fatih/vim-go'
 Plug 'nsf/gocode', {'rtp': 'nvim/'}
