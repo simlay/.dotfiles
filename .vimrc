@@ -367,6 +367,7 @@ Plug 'tpope/vim-fugitive'
 
 " Rust!
 Plug 'rust-lang/rust.vim'
+au BufRead,BufNewFile,BufEnter *.rs map <leader>r A<CR>#[cfg(debug_assertions)] unsafe { std::intrinsics::breakpoint(); }<ESC>
 Plug 'Shougo/deoplete.nvim'
 Plug 'elixir-editors/vim-elixir'
 Plug 'vim-scripts/widl.vim'
