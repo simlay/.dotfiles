@@ -42,7 +42,7 @@ fix_bluetooth() {
 update-rust-analyzer() {
     pushd .
     cd ~/Downloads/
-    gh release -R rust-lang/rust-analyzer download -p '*-aarch64-apple-darwin.gz'
+    gh release -R rust-lang/rust-analyzer download nightly -p '*-aarch64-apple-darwin.gz'
     gunzip rust-analyzer-aarch64-apple-darwin.gz
     chmod +x rust-analyzer-aarch64-apple-darwin
     ./rust-analyzer-aarch64-apple-darwin --version
