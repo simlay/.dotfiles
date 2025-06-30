@@ -46,7 +46,7 @@ xset r rate 175 40
 
 # Network manager applet
 nm-applet --sm-disable &
-setxkbmap dvorak
+setxkbmap us dvorak
 
 pasystray & disown
 #systemctl --user restart redshift

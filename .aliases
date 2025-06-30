@@ -6,13 +6,15 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
-alias quake=~/Applications/ioquake3/ioquake3.app/Contents/MacOS/ioquake3
 alias fig="docker-compose"
+alias quake=~/projects/ioq3/build/release-linux-x86_64/ioquake3.x86_64
 alias mplayer="mpv"
 alias docker-start="bash --login '/Applications/Docker/Docker Quickstart Terminal.app/Contents/Resources/Scripts/start.sh'"
 alias weather='curl http://wttr.in/seattle'
-alias asdf='setxkbmap dvorak'
-alias aoeu='setxkbmap us'
+alias asdf='setxkbmap us dvorak && xset r rate 175 40'
+alias aoeu='setxkbmap us && xset r rate 175 40'
+alias svim="vim -N -u /dev/null"
+alias lockscreen="xlock -dpmsoff 120 -mode random"
 
 # Shortcuts
 alias d="cd ~/Dropbox"
